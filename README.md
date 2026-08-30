@@ -1,6 +1,11 @@
-# SSW2 Construction Study — GitHub Pages PWA
+## Questionnaire sets
 
-This folder is ready to publish directly with GitHub Pages.
+This build has two complete questionnaire selections:
+
+- **Set 1** — Theoretical (62) + Practical (23)
+- **Set 2** — Theoretical (62) + Practical (23)
+
+Each set keeps its own question IDs and can be selected independently in the app.
 
 ## Upload to GitHub
 
