@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ssw2-construction-pwa-v1';
+const CACHE_NAME = 'ssw2-construction-pwa-v6';
 const APP_SHELL = [
   './',
   './index.html',
@@ -10,9 +10,7 @@ const APP_SHELL = [
 ];
 
 self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL))
-  );
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)));
   self.skipWaiting();
 });
 

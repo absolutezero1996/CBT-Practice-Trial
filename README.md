@@ -1,71 +1,59 @@
-## Questionnaire sets
+## Current question banks
 
-This build has two complete questionnaire selections:
+### Theoretical
+- **Set 1:** 62 existing sample questions
+- **Set 2:** 421 questions from `学科練習 01.pdf` through `学科練習 11.pdf`
+  - Practice 01: 21 questions
+  - Practice 02–11: 40 questions each
+  - 23 source figures/photos/graphs are embedded
 
-- **Set 1** — Theoretical (62) + Practical (23)
-- **Set 2** — Theoretical (62) + Practical (23)
+### Practical
+- **Set 1:** 23 existing practical sample questions
+- **Set 2:** 55 implementation-practice questions
 
-Each set keeps its own question IDs and can be selected independently in the app.
+Theoretical Set 2 preserves the 11 uploaded practice papers as separate selectable
+`Practice 01` through `Practice 11` groups. The source PDFs do not provide English
+translations for these theory questions, so Japanese/furigana remain the source-grounded
+study text and English mode displays the source-not-available notice.
 
-## Upload to GitHub
+## Practical question banks
 
-1. Go to GitHub and create a new repository.
-   Example repository name: `ssw2-construction-study`
+The Practical section now has two separate banks:
 
-2. Open the new repository and choose:
-   **Add file → Upload files**
+- **Set 1:** 23 existing practical sample questions
+- **Set 2:** 55 unique questions from `実施3.pdf` / `[Blank] 実施1.pdf`
 
-3. Upload the CONTENTS of this folder to the root of the repository:
-   - index.html
-   - manifest.webmanifest
-   - sw.js
-   - .nojekyll
-   - icons/
+The two uploaded PDFs contain the same new practical-question collection in answer/translated and blank forms. One repeated source Question 124 was removed from Set 2, leaving 55 unique questions.
 
-   Do not upload only the ZIP file.
+Set 2 retains the source question numbers, answer highlights from the annotated PDF, furigana, English wording where supplied, and 14 source images.
 
-4. Commit the uploaded files.
+# SSW2 Construction Study — Merged / Deduplicated
 
-5. In the repository, open:
-   **Settings → Pages**
+Set 1 and Set 2 were compared and found to contain the same question content.
 
-6. Under **Build and deployment**:
-   - Source: **Deploy from a branch**
-   - Branch: **main**
-   - Folder: **/(root)**
-   - Click **Save**
+The duplicate questionnaire-set selector has therefore been removed.
 
-7. Wait a minute or two for GitHub Pages to publish the site.
+Current unique question bank:
 
-Your address will normally look like:
+- **Theoretical: 62**
+  - Sample Questions: 34
+  - Additional Sample: 28
+- **Practical: 23**
+  - Sample Questions: 7
+  - Additional Sample: 16
 
-`https://YOUR-GITHUB-NAME.github.io/ssw2-construction-study/`
+Total: **85 unique questions**
 
-## Install on iPad
+## Updating GitHub Pages
 
-1. Open the GitHub Pages address in **Safari**.
-2. Confirm the questionnaire appears and works.
-3. Tap the **Share** button.
-4. Tap **Add to Home Screen**.
-5. Tap **Add**.
-6. Open **SSW2 Study** from the iPad Home Screen.
+Upload/replace these files in the root of your existing GitHub Pages repository:
 
-The installed version opens as a standalone PWA without the normal Safari address bar.
+- `index.html`
+- `sw.js`
+- `manifest.webmanifest`
+- `.nojekyll`
+- `icons/`
 
-## Offline use
+You do not need to change Settings → Pages again.
 
-Open the installed app at least once while connected to the internet.
-The service worker will cache the questionnaire and its local assets for offline use.
-
-## Updating the questionnaire later
-
-When replacing `index.html`, also change this line near the top of `sw.js`:
-
-`const CACHE_NAME = 'ssw2-construction-pwa-v1';`
-
-Change `v1` to `v2`, then `v3`, etc. This forces installed devices to refresh the cached version.
-
-## Important
-
-Do not try to install the PWA by opening `index.html` directly from the iPad Files app.
-iPadOS file preview does not provide the normal HTTPS/service-worker environment required by a PWA.
+The service-worker cache version is now `v4`, so installed iPad PWAs should refresh to this merged build after reopening/reloading the site.

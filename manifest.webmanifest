@@ -1,7 +1,7 @@
 {
   "name": "SSW2 Construction Study",
   "short_name": "SSW2 Study",
-  "description": "Offline SSW Construction Type 2 theoretical and practical questionnaire with furigana and English.",
+  "description": "SSW Construction Type 2 theoretical and practical questionnaire with furigana and English.",
   "id": "./",
   "start_url": "./index.html",
   "scope": "./",
