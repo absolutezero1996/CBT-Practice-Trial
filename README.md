@@ -1,59 +1,28 @@
-## Current question banks
+# SSW2 Construction Study - English Fixed
+
+English is populated for every question and every answer option.
+
+## Question banks
 
 ### Theoretical
-- **Set 1:** 62 existing sample questions
-- **Set 2:** 421 questions from `学科練習 01.pdf` through `学科練習 11.pdf`
-  - Practice 01: 21 questions
-  - Practice 02–11: 40 questions each
-  - 23 source figures/photos/graphs are embedded
+- Set 1: 62 questions
+- Set 2: 421 questions
+  - Practice 01: 21
+  - Practice 02-11: 40 each
 
 ### Practical
-- **Set 1:** 23 existing practical sample questions
-- **Set 2:** 55 implementation-practice questions
+- Set 1: 23 questions
+- Set 2: 55 questions
 
-Theoretical Set 2 preserves the 11 uploaded practice papers as separate selectable
-`Practice 01` through `Practice 11` groups. The source PDFs do not provide English
-translations for these theory questions, so Japanese/furigana remain the source-grounded
-study text and English mode displays the source-not-available notice.
+Practical Set 2 retains the English wording supplied with the translated practical PDF.
+Theoretical Set 2 English was translated from the Japanese wording in `学科練習 01.pdf`
+through `学科練習 11.pdf`.
 
-## Practical question banks
+## GitHub Pages update
 
-The Practical section now has two separate banks:
+Replace the files in the root of your existing GitHub Pages repository with the
+contents of this ZIP. In particular, replace `index.html`, `sw.js`, and
+`manifest.webmanifest`, and upload the `icons` folder and `.nojekyll`.
 
-- **Set 1:** 23 existing practical sample questions
-- **Set 2:** 55 unique questions from `実施3.pdf` / `[Blank] 実施1.pdf`
-
-The two uploaded PDFs contain the same new practical-question collection in answer/translated and blank forms. One repeated source Question 124 was removed from Set 2, leaving 55 unique questions.
-
-Set 2 retains the source question numbers, answer highlights from the annotated PDF, furigana, English wording where supplied, and 14 source images.
-
-# SSW2 Construction Study — Merged / Deduplicated
-
-Set 1 and Set 2 were compared and found to contain the same question content.
-
-The duplicate questionnaire-set selector has therefore been removed.
-
-Current unique question bank:
-
-- **Theoretical: 62**
-  - Sample Questions: 34
-  - Additional Sample: 28
-- **Practical: 23**
-  - Sample Questions: 7
-  - Additional Sample: 16
-
-Total: **85 unique questions**
-
-## Updating GitHub Pages
-
-Upload/replace these files in the root of your existing GitHub Pages repository:
-
-- `index.html`
-- `sw.js`
-- `manifest.webmanifest`
-- `.nojekyll`
-- `icons/`
-
-You do not need to change Settings → Pages again.
-
-The service-worker cache version is now `v4`, so installed iPad PWAs should refresh to this merged build after reopening/reloading the site.
+The cache name is `ssw2-construction-pwa-v7`, so existing PWA installations should
+receive the updated version after reopening/reloading the site.

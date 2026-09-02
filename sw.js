@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ssw2-construction-pwa-v6';
+const CACHE_NAME = 'ssw2-construction-pwa-v7';
 const APP_SHELL = [
   './',
   './index.html',
