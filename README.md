@@ -1,3 +1,22 @@
+## Set 2 deduplication
+
+Repeated questions inside Set 2 have been removed while retaining one clean copy.
+
+### Current counts
+- Theoretical Set 1: 62
+- **Theoretical Set 2: 377** (44 duplicate copies removed)
+- Practical Set 1: 23
+- **Practical Set 2: 54** (1 duplicate copy removed)
+
+Total question records in the app: **516**.
+
+Questions that merely cover a similar topic but use a different image, ask a different fact,
+or provide meaningfully different choices were retained.
+
+See `DUPLICATES_REMOVED.txt` for the duplicate pairs/groups that were removed.
+
+The PWA cache version is `v8`.
+
 # SSW2 Construction Study - English Fixed
 
 English is populated for every question and every answer option.
