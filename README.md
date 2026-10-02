@@ -1,3 +1,15 @@
+## Furigana correction
+
+Furigana was rebuilt and audited across every theoretical and practical set.
+
+- Every kanji group in every question has an explicit hiragana reading.
+- Every kanji group in every answer choice has an explicit hiragana reading.
+- Missing readings and mixed kanji-without-reading cases, including the issues seen in Set 6, were corrected.
+- Question text, answers, English translations, images, and answer keys were otherwise preserved.
+- See `FURIGANA_AUDIT.txt` for the per-set validation summary.
+
+PWA cache version: `v12`.
+
 # SSW2 Construction Study
 
 ## Theoretical

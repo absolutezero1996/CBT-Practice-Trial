@@ -1,0 +1,21 @@
+SSW2 Construction Study - Furigana Audit
+
+Result: PASS
+Every kanji group in every question and answer choice now has an explicit hiragana reading.
+
+Theoretical Set1: 62 questions, 248 answer choices, 998 kanji groups checked
+Theoretical Set2: 21 questions, 84 answer choices, 307 kanji groups checked
+Theoretical Set3: 40 questions, 160 answer choices, 606 kanji groups checked
+Theoretical Set4: 40 questions, 160 answer choices, 666 kanji groups checked
+Theoretical Set5: 40 questions, 160 answer choices, 925 kanji groups checked
+Theoretical Set6: 40 questions, 160 answer choices, 555 kanji groups checked
+Theoretical Set7: 40 questions, 159 answer choices, 657 kanji groups checked
+Theoretical Set8: 40 questions, 160 answer choices, 556 kanji groups checked
+Theoretical Set9: 40 questions, 160 answer choices, 715 kanji groups checked
+Theoretical Set10: 40 questions, 160 answer choices, 722 kanji groups checked
+Theoretical Set11: 40 questions, 160 answer choices, 545 kanji groups checked
+Practical Set1: 23 questions, 92 answer choices, 346 kanji groups checked
+Practical Set2: 55 questions, 220 answer choices, 661 kanji groups checked
+
+The quiz answer keys, English translations, images, and question-set structure were not changed.
+PWA cache version: v12
