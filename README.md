@@ -1,3 +1,16 @@
+## Randomized answer choices
+
+Answer choices are now randomized independently for every question.
+
+- A fresh app/page opening creates a new choice order.
+- **Reset progress** creates another new choice order.
+- Choices do not move while you remain in the same practice session.
+- Question order is still randomized independently.
+- Correct-answer checking follows the shuffled position, so the original PDF answer letter/number is not exposed by position.
+- Keyboard keys `1`–`4` select the currently displayed shuffled choices.
+
+PWA cache version: `v13`.
+
 ## Furigana correction
 
 Furigana was rebuilt and audited across every theoretical and practical set.

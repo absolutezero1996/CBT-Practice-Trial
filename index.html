@@ -85,7 +85,7 @@ html[data-theme="dark"] .question-image{border-color:#435767}
         <div class="actions"><button class="secondary" id="prevBtn">← Previous</button><button class="primary" id="checkBtn">Check answer</button><button class="secondary next" id="nextBtn">Next →</button></div>
       </section>
       <div class="shortcuts"><span class="kbd">1-4</span> choose &nbsp; <span class="kbd">Enter</span> check / next &nbsp; <span class="kbd">←</span><span class="kbd">→</span> navigate</div>
-      <div class="source-note">Progress is temporary and resets automatically whenever you fully close and reopen the app. The question order is randomized each time the app starts. Theoretical and practical questions are kept as separate study sections. Each supplied theoretical PDF is its own separate theoretical set. Practical has Set 1 and Set 2 from 実施3. Furigana has been rebuilt and checked across every set so every kanji in question and answer text has a hiragana reading. The questionnaire is an independent offline practice page and is not affiliated with the referenced study portal.</div>
+      <div class="source-note">Progress is temporary and resets automatically whenever you fully close and reopen the app. The question order and the answer choices are randomized each time the app starts and every time you reset progress. Choices stay in the same order during the current session. Theoretical and practical questions are kept as separate study sections. Each supplied theoretical PDF is its own separate theoretical set. Practical has Set 1 and Set 2 from 実施3. Furigana has been rebuilt and checked across every set so every kanji in question and answer text has a hiragana reading. The questionnaire is an independent offline practice page and is not affiliated with the referenced study portal.</div>
     </main>
   </div>
 </div>
@@ -99,7 +99,19 @@ function makeRandomOrder(list){
   }
   return ids;
 }
-let state={answers:{},lang:'all',theme:'light',track:'theoretical',theoreticalBank:'set1',practicalBank:'set1',set:'all',index:0,order:makeRandomOrder(QUESTIONS)};
+function makeChoiceOrders(list){
+  const out={};
+  (list||QUESTIONS).forEach(q=>{
+    const order=q.options.map((_,i)=>i);
+    for(let i=order.length-1;i>0;i--){
+      const j=Math.floor(Math.random()*(i+1));
+      [order[i],order[j]]=[order[j],order[i]];
+    }
+    out[q.id]=order;
+  });
+  return out;
+}
+let state={answers:{},lang:'all',theme:'light',track:'theoretical',theoreticalBank:'set1',practicalBank:'set1',set:'all',index:0,order:makeRandomOrder(QUESTIONS),choiceOrders:makeChoiceOrders(QUESTIONS)};
 const $=s=>document.querySelector(s);
 const setSelect=$('#setSelect'),qbody=$('#qbody'),qtag=$('#qtag'),qcount=$('#qcount'),checkBtn=$('#checkBtn'),nextBtn=$('#nextBtn'),prevBtn=$('#prevBtn'),reviewBadge=$('#reviewBadge');
 function save(){/* Session-only: intentionally not persisted */}
@@ -294,17 +306,26 @@ function render(){
     qtag.textContent=`${section} · ${q.set} · Question ${q.number}`;
   } qcount.textContent=`${state.index+1} / ${list.length}`; reviewBadge.classList.toggle('show',state.set==='wrong');
   let h=langParts(q,'q'); if(q.image)h+=`<img class="question-image" src="${q.image}" alt="Question ${q.number} reference image">`;
+  const choiceOrder=(state.choiceOrders&&state.choiceOrders[q.id])||q.options.map((_,i)=>i);
+  const correctDisplay=choiceOrder.indexOf(q.answer-1)+1;
   h+='<div class="options">';
-  q.options.forEach((o,i)=>{const n=i+1;let cls='option';if(rec.choice===n)cls+=' selected';if(answered&&n===q.answer)cls+=' correct';if(answered&&rec.choice===n&&n!==q.answer)cls+=' wrong';h+=`<button class="${cls}" data-choice="${n}" ${answered?'disabled':''}><span class="num">${n}</span><span>${langParts(o,'o')}</span></button>`});
+  choiceOrder.forEach((originalIndex,displayIndex)=>{
+    const o=q.options[originalIndex],n=displayIndex+1;
+    let cls='option';
+    if(rec.choice===n)cls+=' selected';
+    if(answered&&n===correctDisplay)cls+=' correct';
+    if(answered&&rec.choice===n&&n!==correctDisplay)cls+=' wrong';
+    h+=`<button class="${cls}" data-choice="${n}" ${answered?'disabled':''}><span class="num">${n}</span><span>${langParts(o,'o')}</span></button>`;
+  });
   h+='</div>';
-  if(answered){const good=rec.correct;const ans=q.options[q.answer-1];h+=`<div class="feedback show ${good?'good':'bad'}"><strong>${good?'Correct!':'Incorrect.'}</strong>Correct answer: ${q.answer}. ${escapeHtml(ans.en||ans.jp)}</div>`}
+  if(answered){const good=rec.correct;const ans=q.options[q.answer-1];h+=`<div class="feedback show ${good?'good':'bad'}"><strong>${good?'Correct!':'Incorrect.'}</strong>Correct answer: ${correctDisplay}. ${escapeHtml(ans.en||ans.jp)}</div>`}
   qbody.innerHTML=h;
   qbody.querySelectorAll('.option').forEach(b=>b.addEventListener('click',()=>choose(+b.dataset.choice)));
   checkBtn.textContent=answered?'Answered':'Check answer';checkBtn.disabled=answered; prevBtn.disabled=state.index===0;nextBtn.disabled=state.index>=list.length-1;
   save();
 }
 function choose(n){const [list,q]=current();if(!q)return;const rec=state.answers[q.id]||{};if(rec.checked)return;state.answers[q.id]={...rec,choice:n,checked:false};save();render()}
-function check(){const [list,q]=current();if(!q)return;const rec=state.answers[q.id]||{};if(!rec.choice){checkBtn.animate([{transform:'translateX(0)'},{transform:'translateX(-5px)'},{transform:'translateX(5px)'},{transform:'translateX(0)'}],{duration:180});return}rec.checked=true;rec.correct=rec.choice===q.answer;state.answers[q.id]=rec;save();render()}
+function check(){const [list,q]=current();if(!q)return;const rec=state.answers[q.id]||{};if(!rec.choice){checkBtn.animate([{transform:'translateX(0)'},{transform:'translateX(-5px)'},{transform:'translateX(5px)'},{transform:'translateX(0)'}],{duration:180});return}const choiceOrder=(state.choiceOrders&&state.choiceOrders[q.id])||q.options.map((_,i)=>i);const correctDisplay=choiceOrder.indexOf(q.answer-1)+1;rec.checked=true;rec.correct=rec.choice===correctDisplay;state.answers[q.id]=rec;save();render()}
 function move(d){const list=baseList();state.index=Math.max(0,Math.min(state.index+d,list.length-1));save();render();window.scrollTo({top:0,behavior:'smooth'})}
 function updateStats(list){
   let relevant=trackQuestions();
@@ -343,7 +364,7 @@ $('#resetBtn').addEventListener('click',()=>{
   const keepTrack=state.track || 'theoretical';
   const keepTheoreticalBank=state.theoreticalBank || 'set1';
   const keepPracticalBank=state.practicalBank || 'set1';
-  state={answers:{},lang:keepLang,theme:keepTheme,track:keepTrack,theoreticalBank:keepTheoreticalBank,practicalBank:keepPracticalBank,set:'all',index:0,order:makeRandomOrder(QUESTIONS)};
+  state={answers:{},lang:keepLang,theme:keepTheme,track:keepTrack,theoreticalBank:keepTheoreticalBank,practicalBank:keepPracticalBank,set:'all',index:0,order:makeRandomOrder(QUESTIONS),choiceOrders:makeChoiceOrders(QUESTIONS)};
   updateThemeUI();
   updateTrackUI();
   $('#langSeg').querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.lang===state.lang));
